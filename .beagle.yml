@@ -40,8 +40,8 @@ steps:
     commands:
       - rm -rf dist
       - mkdir -p dist
-      - curl -x $${SOCKS5_PROXY} https://github.com/envoyproxy/envoy/releases/download/v$${ENVOY_VERSION}/envoy-$${ENVOY_VERSION}-linux-x86_64 > dist/envoy-linux-amd64
-      - curl -x $${SOCKS5_PROXY} https://github.com/envoyproxy/envoy/releases/download/v$${ENVOY_VERSION}/envoy-$${ENVOY_VERSION}-linux-aarch_64 > dist/envoy-linux-arm64
+      - curl -x $${SOCKS5_PROXY} -sL https://github.com/envoyproxy/envoy/releases/download/v$${ENVOY_VERSION}/envoy-$${ENVOY_VERSION}-linux-x86_64 > dist/envoy-linux-amd64
+      - curl -x $${SOCKS5_PROXY} -sL https://github.com/envoyproxy/envoy/releases/download/v$${ENVOY_VERSION}/envoy-$${ENVOY_VERSION}-linux-aarch_64 > dist/envoy-linux-arm64
 
   - name: install-envoy-mips64le
     image: loongnixk8s/envoyproxy-envoy:v1.15.1
