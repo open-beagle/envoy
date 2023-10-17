@@ -11,6 +11,6 @@ ARG TARGETOS
 ARG TARGETARCH
 
 ADD ./configs/envoyproxy_io_proxy.yaml /etc/envoy/envoy.yaml
-ADD ./dist/envoy-$TARGETOS-$TARGETARCH /usr/local/bin/envoy
+ADD ./build/envoy-$TARGETOS-$TARGETARCH /usr/local/bin/envoy
 
 CMD ["envoy", "-c", "/etc/envoy/envoy.yaml"]

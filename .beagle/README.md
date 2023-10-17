@@ -21,6 +21,15 @@ v1.24以上的版本要求Ubuntu 20.04 glibc >= 2.30.
 
 ## Images
 
+```bash
+export SOCKS5_PROXY=socks5://www.ali.wodcloud.com:1283
+export ENVOY_VERSION=1.23.12
+rm -rf build
+mkdir -p build 
+curl -x ${SOCKS5_PROXY} -L https://github.com/envoyproxy/envoy/releases/download/v${ENVOY_VERSION}/envoy-${ENVOY_VERSION}-linux-x86_64 > build/envoy-linux-amd64
+curl -x ${SOCKS5_PROXY} -L https://github.com/envoyproxy/envoy/releases/download/v${ENVOY_VERSION}/envoy-${ENVOY_VERSION}-linux-aarch_64 > build/envoy-linux-arm64
+```
+
 ### amd64
 
 ```bash
