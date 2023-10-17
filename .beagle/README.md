@@ -10,7 +10,7 @@ git remote add upstream git@github.com:envoyproxy/envoy.git
 git fetch upstream
 
 # merge
-git merge v1.23.11
+git merge v1.23.12
 ```
 
 ## 注意
@@ -25,8 +25,8 @@ v1.24以上的版本要求Ubuntu 20.04 glibc >= 2.30.
 
 ```bash
 # envoy
-docker pull envoyproxy/envoy:v1.23.11 && \
-docker tag envoyproxy/envoy:v1.23.11 registry.cn-qingdao.aliyuncs.com/wod/envoy:1.23.11-amd64 && \
+docker pull envoyproxy/envoy:v1.23.12 && \
+docker tag envoyproxy/envoy:v1.23.12 registry.cn-qingdao.aliyuncs.com/wod/envoy:1.23.11-amd64 && \
 docker push registry.cn-qingdao.aliyuncs.com/wod/envoy:1.23.11-amd64
 ```
 
@@ -34,8 +34,8 @@ docker push registry.cn-qingdao.aliyuncs.com/wod/envoy:1.23.11-amd64
 
 ```bash
 # envoy
-docker pull --platform=linux/arm64 envoyproxy/envoy:v1.23.11 && \
-docker tag envoyproxy/envoy:v1.23.11 registry.cn-qingdao.aliyuncs.com/wod/envoy:1.23.11-arm64 && \
+docker pull --platform=linux/arm64 envoyproxy/envoy:v1.23.12 && \
+docker tag envoyproxy/envoy:v1.23.12 registry.cn-qingdao.aliyuncs.com/wod/envoy:1.23.11-arm64 && \
 docker push registry.cn-qingdao.aliyuncs.com/wod/envoy:1.23.11-arm64
 ```
 
