@@ -71,6 +71,30 @@ docker run --rm \
   registry.cn-qingdao.aliyuncs.com/wod/devops-docker-manifest:1.0
 ```
 
+## build
+
+```bash
+docker build \
+  --no-cache \
+  --file ./.beagle/build.dockerfile \
+  --build-arg BASE=registry-vpc.cn-qingdao.aliyuncs.com/wod/debian:bullseye \
+  --tag registry-vpc.cn-qingdao.aliyuncs.com/wod/envoy:1.23-build \
+  .
+
+docker push registry-vpc.cn-qingdao.aliyuncs.com/wod/envoy:1.23-build
+
+docker run -it --rm \
+  -v $PWD/:/go/src/github.com/envoyproxy/envoy \
+  -w /go/src/github.com/envoyproxy/envoy \
+  registry-vpc.cn-qingdao.aliyuncs.com/wod/golang:v1.22.2-bullseye-amd64 \
+  bash
+  export PATH="/usr/lib/llvm-11/bin:$PATH" && \
+  export LDFLAGS="-L /usr/lib/llvm-11/lib" && \
+  export CPPFLAGS="-I /usr/lib/llvm-11/include" && \
+  export GOPROXY=https://goproxy.cn && \
+  bazel build -c opt --config=clang envoy
+```
+
 ## cache
 
 ```bash
