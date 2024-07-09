@@ -23,6 +23,8 @@
 !\.yapfignore
 !\.zuul
 !\.zuul.yaml
+!\.beagle
+!\.beagle.yml
 
 /bazel-*
 /mobile/bazel-*
