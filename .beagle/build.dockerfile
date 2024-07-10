@@ -24,7 +24,8 @@ LABEL maintainer=$AUTHOR version=$VERSION
     unzip \
     virtualenv \
     git \
-    libstdc++-11-dev &&
+    libc++-14-dev \
+    libstdc++-11-dev
   apt-get clean &&
   rm -rf /var/cache/apt /var/lib/apt/lists/* /etc/apt/sources.list.d/*.list &&
   sudo curl -x socks5://www.ali.wodcloud.com:1283 \

@@ -13,6 +13,15 @@ git fetch upstream
 git merge v1.30.4
 ```
 
+## bin
+
+```bash
+mkdir -p build && \
+  curl -x socks5://www.ali.wodcloud.com:1283 -sL \
+  https://github.com/envoyproxy/envoy/releases/download/v1.30.4/envoy-1.30.4-linux-x86_64 > \
+  build/envoy-1.30.4-linux-x86_64
+```
+
 ## build
 
 ```bash
@@ -37,23 +46,7 @@ docker run -it --rm \
   registry-vpc.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-202405-amd64 \
   bash
 
-  bazel/setup_clang.sh build/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04
-
   13467 / 14820
-
-  apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev \
-      libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev && \
-    curl -x socks5://www.ali.wodcloud.com:1283 -sL \
-      https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tgz > \
-      /tmp/Python-3.11.9.tgz && \
-    tar -xvf /tmp/Python-3.11.9.tgz -C /tmp && \
-    cd /tmp/Python-3.11.9 && \
-    ./configure --enable-optimizations && \
-    nproc && \
-    make -j 4 && \
-    make altinstall && \
-    python3.11 --version && \
-    cd /go/src/github.com/envoyproxy/envoy
 
   groupadd -r docker && \
   useradd -r -g docker docker && \
@@ -70,8 +63,7 @@ docker tag envoyproxy/envoy-build-ubuntu:75238004b0fcfd8a7f71d380d7a774dda5c3962
 docker push registry.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-20240521-amd64
 
 export LLVM_ROOT=/home/code/go/src/github.com/open-beagle/envoy/build/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04
-
-./ci/run_envoy_docker.sh './ci/do_ci.sh dev'
+./ci/do_ci.sh dev
 
 docker build \
   --build-arg BASE=registry.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-20240521-amd64 \
