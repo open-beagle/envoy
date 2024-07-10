@@ -2,7 +2,7 @@ kind: pipeline
 name: docker
 trigger:
   branch:
-    - dev
+    - dev-xx
 
 volumes:
   - name: docker
@@ -84,28 +84,10 @@ steps:
       registry_password:
         from_secret: REGISTRY_PASSWORD_ALIYUN
 
-  - name: docker-mips64le
-    image: registry.cn-qingdao.aliyuncs.com/wod/devops-docker:1.0
-    volumes:
-      - name: docker
-        path: /var/run/docker.sock
-    settings:
-      base: registry.cn-qingdao.aliyuncs.com/wod/alpine:3-mips64le
-      dockerfile: .beagle/dockerfile
-      repo: wod/envoy
-      version: v1.23.12
-      channel: 'mips64le'
-      args: 'TARGETOS=linux,TARGETARCH=mips64le'
-      registry: registry.cn-qingdao.aliyuncs.com
-      registry_user:
-        from_secret: REGISTRY_USER_ALIYUN
-      registry_password:
-        from_secret: REGISTRY_PASSWORD_ALIYUN
-
   - name: docker-arch
     image: registry.cn-qingdao.aliyuncs.com/wod/devops-docker-manifest:1.0
     settings:
-      platforms: linux/amd64,linux/arm64,linux/mips64le
+      platforms: linux/amd64,linux/arm64
       template: registry.cn-qingdao.aliyuncs.com/wod/envoy:v1.23.12-ARCH
       target: registry.cn-qingdao.aliyuncs.com/wod/envoy:v1.23.12
       username:

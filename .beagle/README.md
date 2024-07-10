@@ -65,6 +65,8 @@ docker push registry.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-20240521-amd
 export LLVM_ROOT=/home/code/go/src/github.com/open-beagle/envoy/build/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04
 ./ci/do_ci.sh dev
 
+mc cp --recursive ./linux/amd64/build_envoy_fastbuild_stripped/envoy-v1.30.5-linux-x86_64 cache/kubernetes/k8s/envoy/envoy-v1.30.5-linux-amd64
+
 docker build \
   --build-arg BASE=registry.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-20240521-amd64 \
   --build-arg AUTHOR=mengkzhaoyun@gmail.com \
