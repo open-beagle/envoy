@@ -19,7 +19,15 @@ git merge v1.30.4
 mkdir -p build && \
   curl -x socks5://www.ali.wodcloud.com:1283 -sL \
   https://github.com/envoyproxy/envoy/releases/download/v1.30.4/envoy-1.30.4-linux-x86_64 > \
-  build/envoy-1.30.4-linux-x86_64
+  build/envoy-1.30.4-linux-x86_64 && \
+  curl -x socks5://www.ali.wodcloud.com:1283 -sL \
+  https://github.com/envoyproxy/envoy/releases/download/v1.30.4/envoy-contrib-1.30.4-linux-x86_64 > \
+  build/envoy-contrib-1.30.4-linux-x86_64
+
+file build/envoy-1.30.4-linux-x86_64 && \
+  ldd build/envoy-1.30.4-linux-x86_64 && \
+  file build/envoy-contrib-1.30.4-linux-x86_64 && \
+  ldd build/envoy-contrib-1.30.4-linux-x86_64
 ```
 
 ## build
@@ -79,6 +87,26 @@ docker build \
 docker push registry-vpc.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-202405-amd64
 
 docker pull registry.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-20240521-amd64
+
+docker run -it --rm \
+  -v $PWD:/source \
+  -w /source \
+  registry-vpc.cn-qingdao.aliyuncs.com/wod/envoy:build-ubuntu-20240521-amd64 \
+  bash -c "bazel build //source/exe:envoy-static"
+```
+
+## push
+
+```bash
+# amd64
+docker pull --platform=linux/amd64 envoyproxy/envoy:v1.30.4 && \
+docker tag envoyproxy/envoy:v1.30.4 registry.cn-qingdao.aliyuncs.com/wod/envoy:v1.30.4-amd64 && \
+docker push registry.cn-qingdao.aliyuncs.com/wod/envoy:v1.30.4-amd64
+
+# arm64
+docker pull --platform=linux/arm64 envoyproxy/envoy:v1.30.4 && \
+docker tag envoyproxy/envoy:v1.30.4 registry.cn-qingdao.aliyuncs.com/wod/envoy:v1.30.4-arm64 && \
+docker push registry.cn-qingdao.aliyuncs.com/wod/envoy:v1.30.4-arm64
 ```
 
 ## cache
